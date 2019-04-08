@@ -16,15 +16,56 @@ class RoversController
                            direction: direction)
   end
 
-  def move_command
-
+  def command_from_user
+    @command = @view.ask("Type 'R' and the rover will move 90º to the right, 'L' and the rover will move 90º to the left and 'M' for the rover to move one grid point in the current direction")
   end
 
+  def new_localization
+    @command.each_char { |command|
+      spin_left if command == 'L'
+      spin_right if command == 'R'
+      move if command == 'M'
+    }
+  end
+
+  private
+
+  def spin_left
+    case command
+    when @new_rover[:direction] == 'N'
+      @new_rover[:direction] = 'W'
+    when @new_rover[:direction] == 'W'
+      @new_rover[:direction] = 'S'
+    when @new_rover[:direction] == 'S'
+      @new_rover[:direction] = 'E'
+    when @new_rover[:direction] == 'E'
+      @new_rover[:direction] = 'N'
+    end
+  end
+
+  def spin_right
+    case command
+    when @new_rover[:direction] == 'N'
+      @new_rover[:direction] = 'E'
+    when @new_rover[:direction] == 'E'
+      @new_rover[:direction] = 'S'
+    when @new_rover[:direction] == 'S'
+      @new_rover[:direction] = 'W'
+    when @new_rover[:direction] == 'W'
+      @new_rover[:direction] = 'N'
+    end
+  end
 
   def move
-    #usar each_char!
+    case command
+    when @new_rover[:direction] == 'N'
+      @new_rover[:latitude] = @new_rover[:latitude] += 1
+    when @new_rover[:direction] == 'E'
+      @new_rover[:longitude] = @new_rover[:longitude] += 1
+    when @new_rover[:direction] == 'S'
+      @new_rover[:latitude] = @new_rover[:latitude] -= 1
+    when @new_rover[:direction] == 'W'
+      @new_rover[:longitude] = @new_rover[:longitude] -= 1
+    end
   end
-
-
-
 end
