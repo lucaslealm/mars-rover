@@ -6,7 +6,7 @@ class Router
 
   def run
     puts "Welcome to the Mars Rover localization program!"
-    puts "           --           "
+    puts " --------------------------------------------- "
 
     while @running
       display_tasks
@@ -21,7 +21,7 @@ class Router
   def route_action(action)
     case action
     when 1 then @controller.create_rover
-    when 2 then @controller.new_localization
+    when 2 then @controller.new_coordinates
     when 0 then stop
     else
       puts "Please press 1, 2 or 0"

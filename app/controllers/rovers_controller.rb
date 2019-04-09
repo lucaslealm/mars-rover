@@ -8,40 +8,39 @@ class RoversController
   end
 
   def create_rover
-    latitude = @view.ask("What's the current latitude of the rover on the plateau? (Choose from 0 to 5)")
-    longitude = @view.ask("What's the current longitude of the rover on the plateau? (Choose from 0 to 5)")
+    latitude = @view.ask("What's the current latitude (Y axis) of the rover on the plateau? (Choose from 0 to 5)")
+    longitude = @view.ask("What's the current longitude (X axis) of the rover on the plateau? (Choose from 0 to 5)")
     direction = @view.ask("What's the current direction of the rover on the plateau? (Type N for North, S for South, E for East and W for West)")
     @new_rover = Rover.new(latitude: latitude,
-              longitude: longitude,
-              direction: direction)
+                           longitude: longitude,
+                           direction: direction)
   end
 
-  def command_from_user
-    p @new_rover
-    @command = @view.ask("Type a sentence with the following commands without spaces: 'R' and the rover will move 90º to the right, 'L' and the rover will move 90º to the left and 'M' for the rover to move one grid point in the current direction")
-    p @command
-  end
-
-  def new_localization
+  def new_coordinates
     command_from_user
+    print `clear`
     @command.each_char do |letter|
-      print `clear`
-      # spin_left if letter == 'L'
-      # spin_right if letter == 'R'
-      # move if letter == 'M'
-      if letter.capitalize == 'L'
-        spin_left
-      elsif letter.capitalize == 'R'
-        spin_right
-      elsif letter.capitalize == 'M'
-        move
-      else
-        puts "#{letter} is an invalid command. Please type 'L', 'R' or 'M'"
-      end
+      moving_condition(letter)
     end
   end
 
   private
+
+  def command_from_user
+    @command = @view.ask("Type a sentence with the following commands without spaces: 'R' and the rover will move 90º to the right, 'L' and the rover will move 90º to the left and 'M' for the rover to move one grid point in the current direction")
+  end
+
+  def moving_condition(letter)
+    if letter.capitalize == 'L'
+      spin_left
+    elsif letter.capitalize == 'R'
+      spin_right
+    elsif letter.capitalize == 'M'
+      move
+    else
+      puts "#{letter} is an invalid command. Please type 'L', 'R' or 'M'"
+    end
+  end
 
   def spin_left
     case @new_rover.direction
