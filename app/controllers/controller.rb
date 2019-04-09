@@ -16,20 +16,28 @@ class Controller
   end
 
   def create_rover
-    longitude = @rover_view.ask("What's the current longitude (X axis) of the rover on the plateau?")
-    latitude = @rover_view.ask("What's the current latitude (Y axis) of the rover on the plateau?")
-    direction = @rover_view.ask("What's the current direction of the rover on the plateau? (Type N for North, S for South, E for East and W for West)")
-    @new_rover = Rover.new(latitude: latitude,
-                           longitude: longitude,
-                           direction: direction)
+    if @new_plateau.nil?
+      puts "Please, define a plateau before deploying a new rover"
+    else
+      longitude = @rover_view.ask("What's the current longitude (X axis) of the rover on the plateau?")
+      latitude = @rover_view.ask("What's the current latitude (Y axis) of the rover on the plateau?")
+      direction = @rover_view.ask("What's the current direction of the rover on the plateau? (Type N for North, S for South, E for East and W for West)")
+      @new_rover = Rover.new(latitude: latitude,
+                             longitude: longitude,
+                             direction: direction)
+    end
   end
 
   def new_coordinates
-    command_from_user
-    print `clear`
-    check_command
-    @command.each_char do |letter|
-      moving_condition(letter)
+    if @new_rover.nil?
+      puts "Please, deploy a new rover before sending commands"
+    else
+      command_from_user
+      print `clear`
+      check_command
+      @command.each_char do |letter|
+        moving_condition(letter)
+      end
     end
   end
 
@@ -41,7 +49,7 @@ class Controller
 
   def check_command
     check_command_validity = @command.upcase.split('') - ['L', 'R', 'M']
-    puts "Invalid command. Type 'R', 'L' or 'M'" unless check_command_validity.empty?
+    puts "Invalid command. Please, type 'R', 'L' or 'M'" unless check_command_validity.empty?
   end
 
   def moving_condition(letter)
@@ -78,5 +86,8 @@ class Controller
     elsif @new_rover.direction == 'W'
       @new_rover.longitude = @new_rover.longitude -= 1
     end
+  end
+
+  def final_position
   end
 end

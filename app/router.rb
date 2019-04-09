@@ -5,8 +5,8 @@ class Router
   end
 
   def run
-    puts "Welcome to the Mars Rover localization program!"
-    puts " --------------------------------------------- "
+    puts "Welcome to the Mars Rover coordinates program!"
+    puts " -------------------------------------------- "
 
     while @running
       display_tasks
@@ -36,9 +36,9 @@ class Router
   def display_tasks
     puts ""
     puts "What do you want to do?"
-    puts "1 - Create a new plateau"
-    puts "2 - Create a new rover"
-    puts "3 - Give commands to an existing rover"
+    puts "1 - Define a new plateau"
+    puts "2 - Deploy a new rover"
+    puts "3 - Send commands to an existing rover"
     puts "0 - Stop and exit the program"
   end
 end
