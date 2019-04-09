@@ -8,8 +8,8 @@ class RoversController
   end
 
   def create_rover
-    latitude = @view.ask("What's the current latitude (Y axis) of the rover on the plateau? (Choose from 0 to 5)")
-    longitude = @view.ask("What's the current longitude (X axis) of the rover on the plateau? (Choose from 0 to 5)")
+    longitude = @view.ask("What's the current longitude (X axis) of the rover on the plateau?")
+    latitude = @view.ask("What's the current latitude (Y axis) of the rover on the plateau?")
     direction = @view.ask("What's the current direction of the rover on the plateau? (Type N for North, S for South, E for East and W for West)")
     @new_rover = Rover.new(latitude: latitude,
                            longitude: longitude,
