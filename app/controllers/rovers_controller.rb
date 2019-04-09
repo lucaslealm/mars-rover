@@ -18,7 +18,7 @@ class RoversController
 
   def command_from_user
     p @new_rover
-    @command = @view.ask("Type a sentence with the following commands: 'R' and the rover will move 90º to the right, 'L' and the rover will move 90º to the left and 'M' for the rover to move one grid point in the current direction")
+    @command = @view.ask("Type a sentence with the following commands without spaces: 'R' and the rover will move 90º to the right, 'L' and the rover will move 90º to the left and 'M' for the rover to move one grid point in the current direction")
     p @command
   end
 
