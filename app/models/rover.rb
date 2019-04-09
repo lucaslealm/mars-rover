@@ -7,6 +7,6 @@ class Rover
   def initialize(attributes = {})
     @latitude = attributes[:latitude].to_i
     @longitude = attributes[:longitude].to_i
-    @direction = attributes[:direction]
+    @direction = attributes[:direction].capitalize
   end
 end

@@ -1,4 +1,4 @@
-require_relative '../models/meal'
+require_relative '../models/rover'
 
 # View created to communicate with the user.
 
@@ -7,4 +7,5 @@ class RoverView
     puts question
     gets.chomp
   end
+
 end
