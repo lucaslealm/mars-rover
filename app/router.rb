@@ -1,7 +1,7 @@
 class Router
   def initialize(controller)
     @controller = controller
-    @running    = true
+    @running = true
   end
 
   def run
@@ -20,11 +20,12 @@ class Router
 
   def route_action(action)
     case action
-    when 1 then @controller.create_rover
-    when 2 then @controller.new_coordinates
+    when 1 then @controller.create_plateau
+    when 2 then @controller.create_rover
+    when 3 then @controller.new_coordinates
     when 0 then stop
     else
-      puts "Please press 1, 2 or 0"
+      puts "Please press 1, 2, 3 or 0"
     end
   end
 
@@ -35,8 +36,9 @@ class Router
   def display_tasks
     puts ""
     puts "What do you want to do?"
-    puts "1 - Create a new rover"
-    puts "2 - Give commands to an existing rover"
+    puts "1 - Create a new plateau"
+    puts "2 - Create a new rover"
+    puts "3 - Give commands to an existing rover"
     puts "0 - Stop and exit the program"
   end
 end

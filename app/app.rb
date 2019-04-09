@@ -1,7 +1,7 @@
-require_relative 'controllers/rovers_controller'
+require_relative 'controllers/controller'
 require_relative 'router'
 
-controller = RoversController.new
+controller = Controller.new
 
 router = Router.new(controller)
 

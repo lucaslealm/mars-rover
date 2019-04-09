@@ -1,16 +1,24 @@
-require_relative '../models/rover'
 require_relative '../views/rover_view'
+require_relative '../views/plateau_view'
 # Created rovers controller to handle the movement of the rovers and the view.
 
-class RoversController
+class Controller
   def initialize
-    @view = RoverView.new
+    @rover_view = RoverView.new
+    @plateau_view = PlateauView.new
+  end
+
+  def create_plateau
+    x_axis = @plateau_view.ask("What's the horizontal size (X axis) of the plateau?")
+    y_axis = @plateau_view.ask("What's the vertical size (Y axis) of the plateau?")
+    @new_plateau = Plateau.new(x_axis: x_axis,
+                               y_axis: y_axis)
   end
 
   def create_rover
-    longitude = @view.ask("What's the current longitude (X axis) of the rover on the plateau?")
-    latitude = @view.ask("What's the current latitude (Y axis) of the rover on the plateau?")
-    direction = @view.ask("What's the current direction of the rover on the plateau? (Type N for North, S for South, E for East and W for West)")
+    longitude = @rover_view.ask("What's the current longitude (X axis) of the rover on the plateau?")
+    latitude = @rover_view.ask("What's the current latitude (Y axis) of the rover on the plateau?")
+    direction = @rover_view.ask("What's the current direction of the rover on the plateau? (Type N for North, S for South, E for East and W for West)")
     @new_rover = Rover.new(latitude: latitude,
                            longitude: longitude,
                            direction: direction)
@@ -19,6 +27,7 @@ class RoversController
   def new_coordinates
     command_from_user
     print `clear`
+    check_command
     @command.each_char do |letter|
       moving_condition(letter)
     end
@@ -27,19 +36,18 @@ class RoversController
   private
 
   def command_from_user
-    @command = @view.ask("Type a sentence with the following commands without spaces: 'R' and the rover will move 90º to the right, 'L' and the rover will move 90º to the left and 'M' for the rover to move one grid point in the current direction")
+    @command = @rover_view.ask("Type a sentence with the following commands without spaces: 'R' and the rover will move 90º to the right, 'L' and the rover will move 90º to the left and 'M' for the rover to move one grid point in the current direction")
+  end
+
+  def check_command
+    check_command_validity = @command.upcase.split('') - ['L', 'R', 'M']
+    puts "Invalid command. Type 'R', 'L' or 'M'" unless check_command_validity.empty?
   end
 
   def moving_condition(letter)
-    if letter.capitalize == 'L'
-      spin_left
-    elsif letter.capitalize == 'R'
-      spin_right
-    elsif letter.capitalize == 'M'
-      move
-    else
-      puts "#{letter} is an invalid command. Please type 'L', 'R' or 'M'"
-    end
+    spin_left if letter.capitalize == 'L'
+    spin_right if letter.capitalize == 'R'
+    move if letter.capitalize == 'M'
   end
 
   def spin_left
