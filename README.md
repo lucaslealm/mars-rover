@@ -46,7 +46,7 @@ Expected Output:
 ### For this solution, I assumed that:
 ```
 NASA has full knowledge on the size of the plateau;
-Each rover will be deployed separately, so they cannot collide;
+Each rover will be operated separately. They can't collide;
 The rover may fall off the plateau if given wrong commands.
 ```
 
