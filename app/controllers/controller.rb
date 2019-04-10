@@ -13,6 +13,8 @@ class Controller
     y_axis = @plateau_view.ask("What's the vertical size (Y axis) of the plateau?")
     @plateau = Plateau.new(x_axis: x_axis,
                            y_axis: y_axis)
+    print `clear`
+    puts "Plateau created with #{x_axis} as horizontal size and #{y_axis} as vertical size"
   end
 
 
@@ -26,6 +28,8 @@ class Controller
       @rover = Rover.new(latitude: latitude,
                          longitude: longitude,
                          direction: direction)
+      print `clear`
+      puts "The rover's current position is: #{@rover.longitude} #{@rover.latitude} #{@rover.direction}"
     end
   end
 

@@ -35,7 +35,7 @@ class Router
 
   def display_tasks
     puts ""
-    puts "What do you want to do?"
+    puts "What do you want to do (type the corresponding number)?"
     puts "1 - Define a new plateau"
     puts "2 - Deploy a new rover"
     puts "3 - Send commands to an existing rover"
