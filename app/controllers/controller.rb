@@ -1,7 +1,7 @@
 require_relative '../views/rover_view'
 require_relative '../views/plateau_view'
-# Created rovers controller to handle the movement of the rovers and the view.
 
+# Created rovers controller to handle the movement of the rovers and the view.
 class Controller
   def initialize
     @rover_view = RoverView.new
@@ -15,8 +15,9 @@ class Controller
                            y_axis: y_axis)
   end
 
+
   def create_rover
-    if @plateau.nil?
+    if @plateau.nil? # Having a plateau is necessary before creating a rover
       puts "Please, define a plateau before deploying a new rover."
     else
       longitude = @rover_view.ask("What's the current longitude (X axis) of the rover on the plateau?")
@@ -28,12 +29,13 @@ class Controller
     end
   end
 
+  # Gets command, checks if letters are valid and returns the new position of the rover
   def new_coordinates
-    if @rover.nil?
+    if @rover.nil? # Having a rover is necessary before giving commands.
       puts 'Please, deploy a new rover before sending commands.'
     else
       command_from_user
-      print `clear`
+      print `clear` # Clears the terminal for better UX.
       check_command
       @command.each_char { |letter| moving_condition(letter) }
     end
@@ -46,6 +48,7 @@ class Controller
     @command = @rover_view.ask("Type a sentence with the following commands without spaces: 'R' and the rover will move 90º to the right, 'L' and the rover will move 90º to the left and 'M' for the rover to move one grid point in the current direction")
   end
 
+  # Method to check if letters in command are only R, L or M and give feedback to the user.
   def check_command
     check_command_validity = @command.upcase.split('').uniq - ['L', 'R', 'M']
     if check_command_validity.empty? == false && check_command_validity.count > 1
@@ -55,6 +58,7 @@ class Controller
     end
   end
 
+  # Defines the conditions for moving the rover based on the commands given by the user.
   def moving_condition(letter)
     spin_left if letter.capitalize == 'L'
     spin_right if letter.capitalize == 'R'

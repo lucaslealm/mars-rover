@@ -1,6 +1,6 @@
 require_relative '../models/plateau'
 
-# Plateau View created to communicate with the user.
+# Plateau View created to communicate with the user/controller.
 
 class PlateauView
   def ask(question)
