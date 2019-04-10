@@ -30,15 +30,12 @@ class Controller
 
   def new_coordinates
     if @rover.nil?
-      puts "Please, deploy a new rover before sending commands."
+      puts 'Please, deploy a new rover before sending commands.'
     else
       command_from_user
       print `clear`
       check_command
-      p @command
-      @command.each_char do |letter|
-        moving_condition(letter)
-      end
+      @command.each_char { |letter| moving_condition(letter) }
     end
     final_position
   end
@@ -50,18 +47,18 @@ class Controller
   end
 
   def check_command
-    check_command_validity = @command.upcase.split('') - ['L', 'R', 'M']
-    puts "Invalid command. Please, type 'R', 'L' or 'M'" unless check_command_validity.empty?
+    check_command_validity = @command.upcase.split('').uniq - ['L', 'R', 'M']
+    if check_command_validity.empty? == false && check_command_validity.count > 1
+      puts "#{check_command_validity.join(' ')} are invalid commands and were not considered. Please, type only 'R', 'L' or 'M'"
+    elsif check_command_validity.empty? == false && check_command_validity.count == 1
+      puts "#{check_command_validity.join(' ')} is an invalid command and was not considered. Please, type only 'R', 'L' or 'M'"
+    end
   end
 
   def moving_condition(letter)
-    if letter.capitalize == 'L'
-      spin_left
-    elsif letter.capitalize == 'R'
-      spin_right
-    elsif letter.capitalize == 'M'
-      move
-    end
+    spin_left if letter.capitalize == 'L'
+    spin_right if letter.capitalize == 'R'
+    move if letter.capitalize == 'M'
   end
 
   def spin_left
