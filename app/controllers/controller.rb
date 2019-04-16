@@ -17,7 +17,6 @@ class Controller
     puts "Plateau created with #{x_axis} as horizontal size and #{y_axis} as vertical size"
   end
 
-
   def create_rover
     if @plateau.nil? # Having a plateau is necessary before creating a rover
       puts "Please, define a plateau before deploying a new rover."

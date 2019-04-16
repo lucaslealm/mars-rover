@@ -1,15 +1,17 @@
-require '../app/models/rover'
+require './app/models/rover'
 
-RSpec.describe 'a rover' do
+RSpec.describe Rover do
+  let(:rover) { Rover.new(latitude: 2, longitude: 5, direction: 'E') }
+
   it 'has a latitude' do
-    raise unless Rover.new(latitude: 2, longitude: 5, direction: 'E').latitude == 2
+    expect(rover.latitude).to eq(2)
   end
 
   it 'has a longitude' do
-    raise unless Rover.new(latitude: 2, longitude: 5, direction: 'E').longitude == 5
+    expect(rover.longitude).to eq(5)
   end
 
   it 'has a direction' do
-    raise unless Rover.new(latitude: 2, longitude: 5, direction: 'E').direction == 'E'
+    expect(rover.direction).to eq('E')
   end
 end
