@@ -1,3 +1,5 @@
+# Created Plateau class to define the boundaries of the plateau NASA is dealing with.
+
 class Plateau
   attr_reader :x_axis, :y_axis
 
