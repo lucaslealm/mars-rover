@@ -1,4 +1,4 @@
-require './app/models/plateau'
+require './lib/models/plateau'
 
 RSpec.describe Plateau do
   let(:plateau) { Plateau.new(x_axis: 10, y_axis: 5) }

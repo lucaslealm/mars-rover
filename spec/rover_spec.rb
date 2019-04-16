@@ -1,4 +1,4 @@
-require './app/models/rover'
+require './lib/models/rover'
 
 RSpec.describe Rover do
   let(:rover) { Rover.new(latitude: 2, longitude: 5, direction: 'E') }
