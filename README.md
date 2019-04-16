@@ -50,6 +50,12 @@ Each rover will be operated separately. They can't collide;
 The rover may fall off the plateau if given wrong commands.
 ```
 
+### To run the tests already implemented:
+```
+cd mars-rover
+rspec spec
+```
+
 ### To run the solution:
 ```
 cd mars-rover/app
